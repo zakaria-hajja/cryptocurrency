@@ -2,6 +2,8 @@ package com.yoti.android.cryptocurrencychallenge.data.di
 
 import com.yoti.android.cryptocurrencychallenge.data.CAPCOIN_ENDPOINT_HOST
 import com.yoti.android.cryptocurrencychallenge.data.CoincapService
+import com.yoti.android.cryptocurrencychallenge.data.datasource.RemoteDataSource
+import com.yoti.android.cryptocurrencychallenge.data.datasource.RetrofitDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +24,11 @@ object DataModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CoincapService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(api: CoincapService): RemoteDataSource {
+        return RetrofitDataSource(api)
     }
 }
