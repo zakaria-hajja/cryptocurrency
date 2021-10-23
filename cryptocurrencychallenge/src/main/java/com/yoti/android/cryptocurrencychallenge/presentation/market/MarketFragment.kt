@@ -1,4 +1,4 @@
-package com.yoti.android.cryptocurrencychallenge.market
+package com.yoti.android.cryptocurrencychallenge.presentation.market
 
 import android.os.Bundle
 import android.view.LayoutInflater

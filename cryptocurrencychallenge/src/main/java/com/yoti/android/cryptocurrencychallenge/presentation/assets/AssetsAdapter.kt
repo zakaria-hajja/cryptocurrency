@@ -1,4 +1,4 @@
-package com.yoti.android.cryptocurrencychallenge.assets
+package com.yoti.android.cryptocurrencychallenge.presentation.assets
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

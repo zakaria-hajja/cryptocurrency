@@ -1,4 +1,4 @@
-package com.yoti.android.cryptocurrencychallenge.assets
+package com.yoti.android.cryptocurrencychallenge.presentation.assets
 
 val dummyAssets = listOf(
         AssetUiItem("BTC", "Bitcoin", "6929.8217756835584756"),

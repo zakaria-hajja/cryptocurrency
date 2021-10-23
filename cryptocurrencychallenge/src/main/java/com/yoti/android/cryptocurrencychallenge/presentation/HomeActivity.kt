@@ -1,7 +1,8 @@
-package com.yoti.android.cryptocurrencychallenge
+package com.yoti.android.cryptocurrencychallenge.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.yoti.android.cryptocurrencychallenge.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
