@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.MediaType
 import okhttp3.ResponseBody
+import org.junit.Assert
 
 
 import org.junit.Test
@@ -38,6 +39,7 @@ class GetHighestMarketByCoinUseCaseTest {
             useCase("bitcoin").collect {
                 result.add(it)
             }
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Success)
             coVerify(exactly = 1) {
@@ -60,7 +62,7 @@ class GetHighestMarketByCoinUseCaseTest {
             useCase("bitcoin").collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.NoInternetConnectionCause)
@@ -89,7 +91,7 @@ class GetHighestMarketByCoinUseCaseTest {
             useCase("bitcoin").collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.HttpCause)
@@ -113,7 +115,7 @@ class GetHighestMarketByCoinUseCaseTest {
             useCase("bitcoin").collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.UnknownCause)
@@ -137,10 +139,10 @@ class GetHighestMarketByCoinUseCaseTest {
             useCase("bitcoin").collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
-            assert(
-                result[1].data!! == MarketDomain(
+            Assert.assertEquals(
+                result[1].data, MarketDomain(
                     baseId = "bitcoin",
                     baseSymbol = "BTC",
                     exchangeId = "hitbtc",
@@ -178,8 +180,8 @@ class GetHighestMarketByCoinUseCaseTest {
             }
             assert(result.size == 2)
             assert(result[0] is Resource.Loading)
-            assert(
-                result[1].data == null
+            Assert.assertEquals(
+                result[1].data, null
             )
             assert(result[1] is Resource.Success)
             coVerify(exactly = 1) {
@@ -204,8 +206,8 @@ class GetHighestMarketByCoinUseCaseTest {
             }
             assert(result.size == 2)
             assert(result[0] is Resource.Loading)
-            assert(
-                result[1].data == null
+            Assert.assertEquals(
+                result[1].data, null
             )
             assert(result[1] is Resource.Success)
             coVerify(exactly = 1) {

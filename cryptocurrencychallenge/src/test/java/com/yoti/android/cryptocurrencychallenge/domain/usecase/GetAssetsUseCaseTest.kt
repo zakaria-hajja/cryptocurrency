@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.MediaType
 import okhttp3.ResponseBody
+import org.junit.Assert
 
 
 import org.junit.Test
@@ -38,6 +39,7 @@ class GetAssetsUseCaseTest {
             useCase().collect {
                 result.add(it)
             }
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Success)
             coVerify(exactly = 1) {
@@ -60,9 +62,10 @@ class GetAssetsUseCaseTest {
             useCase().collect {
                 result.add(it)
             }
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Success)
-            assert(result[1].data == emptyList<AssetDomain>())
+            Assert.assertEquals(result[1].data, emptyList<AssetDomain>())
             coVerify(exactly = 1) {
                 repository.getAssets()
             }
@@ -83,7 +86,7 @@ class GetAssetsUseCaseTest {
             useCase().collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.NoInternetConnectionCause)
@@ -112,7 +115,7 @@ class GetAssetsUseCaseTest {
             useCase().collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.HttpCause)
@@ -136,7 +139,7 @@ class GetAssetsUseCaseTest {
             useCase().collect {
                 result.add(it)
             }
-            assert(result.size == 2)
+            Assert.assertEquals(result.size, 2)
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Exception)
             assert(result[1].cause is Resource.Exception.Cause.UnknownCause)
