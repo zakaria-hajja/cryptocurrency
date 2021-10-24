@@ -26,7 +26,7 @@ class GetAssetsUseCaseTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `When getAssetsUseCase is invoked,sucess then call repository getAssets`() {
+    fun `When getAssetsUseCase is invoked,repository getAssets returns success`() {
         runBlockingTest {
             coEvery {
                 repository.getAssets()
@@ -40,6 +40,29 @@ class GetAssetsUseCaseTest {
             }
             assert(result[0] is Resource.Loading)
             assert(result[1] is Resource.Success)
+            coVerify(exactly = 1) {
+                repository.getAssets()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `When getAssetsUseCase is invoked,repository getAssets returns emptyList`() {
+        runBlockingTest {
+            coEvery {
+                repository.getAssets()
+            } returns emptyList()
+
+            val useCase = GetAssetsUseCase(repository)
+
+            val result = mutableListOf<Resource<List<AssetDomain>>>()
+            useCase().collect {
+                result.add(it)
+            }
+            assert(result[0] is Resource.Loading)
+            assert(result[1] is Resource.Success)
+            assert(result[1].data == emptyList<AssetDomain>())
             coVerify(exactly = 1) {
                 repository.getAssets()
             }

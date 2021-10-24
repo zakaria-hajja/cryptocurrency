@@ -122,4 +122,95 @@ class GetHighestMarketByCoinUseCaseTest {
             }
         }
     }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `When GetHighestMarketsByCoinUseCase match the highest market`() {
+        runBlockingTest {
+            coEvery {
+                repository.getMarkets()
+            } returns dummyBitcoinMarkets
+
+            val useCase = GetHighestMarketByCoinUseCase(repository)
+
+            val result = mutableListOf<Resource<MarketDomain>>()
+            useCase("bitcoin").collect {
+                result.add(it)
+            }
+            assert(result.size == 2)
+            assert(result[0] is Resource.Loading)
+            assert(
+                result[1].data!! == MarketDomain(
+                    baseId = "bitcoin",
+                    baseSymbol = "BTC",
+                    exchangeId = "hitbtc",
+                    percentExchangeVolume = "22.8693492128634858",
+                    priceQuote = "6941.4400000000000000",
+                    volumeUsd24Hr = "57814559.6160000000000000",
+                    quoteId = "united-states-dollar",
+                    tradesCount24Hr = 11827,
+                    updated = 1533581015313,
+                    quoteSymbol = "USD",
+                    priceUsd = "6941.4400000000000000",
+                    rank = "1"
+                )
+            )
+            assert(result[1] is Resource.Success)
+            coVerify(exactly = 1) {
+                repository.getMarkets()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `When GetHighestMarketsByCoinUseCase don't match any market`() {
+        runBlockingTest {
+            coEvery {
+                repository.getMarkets()
+            } returns dummyBitcoinMarkets
+
+            val useCase = GetHighestMarketByCoinUseCase(repository)
+
+            val result = mutableListOf<Resource<MarketDomain>>()
+            useCase("eth").collect {
+                result.add(it)
+            }
+            assert(result.size == 2)
+            assert(result[0] is Resource.Loading)
+            assert(
+                result[1].data == null
+            )
+            assert(result[1] is Resource.Success)
+            coVerify(exactly = 1) {
+                repository.getMarkets()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `When GetHighestMarketsByCoinUseCase, repository returns empty list`() {
+        runBlockingTest {
+            coEvery {
+                repository.getMarkets()
+            } returns emptyList()
+
+            val useCase = GetHighestMarketByCoinUseCase(repository)
+
+            val result = mutableListOf<Resource<MarketDomain>>()
+            useCase("eth").collect {
+                result.add(it)
+            }
+            assert(result.size == 2)
+            assert(result[0] is Resource.Loading)
+            assert(
+                result[1].data == null
+            )
+            assert(result[1] is Resource.Success)
+            coVerify(exactly = 1) {
+                repository.getMarkets()
+            }
+        }
+    }
 }
