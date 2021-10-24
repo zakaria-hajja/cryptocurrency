@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        android:text="Oops !" />
+        android:text="@string/oops" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/error_view_message"
@@ -48,5 +48,5 @@
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/purple_700"
         app:layout_constraintTop_toBottomOf="@+id/error_view_message"
-        android:text="Retry !" />
+        android:text="@string/retry" />
 </androidx.constraintlayout.widget.ConstraintLayout>

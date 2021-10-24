@@ -51,7 +51,7 @@ class MarketFragment : Fragment(), View.OnClickListener {
         })
 
         viewModel.showEmpty.observe(viewLifecycleOwner, { showEmpty ->
-            binding.emptyView.emptyViewMessage.text = getString(R.string.empty_market)
+            binding.emptyView.emptyViewMessage.text = getString(R.string.no_matching_market)
             binding.emptyView.root.visibility = if (showEmpty) View.VISIBLE else View.GONE
         })
         viewModel.showError.observe(viewLifecycleOwner, { cause ->
