@@ -2,6 +2,7 @@ package com.yoti.android.cryptocurrencychallenge.data.model.markets
 
 
 import com.google.gson.annotations.SerializedName
+import com.yoti.android.cryptocurrencychallenge.domain.model.MarketDomain
 
 data class MarketData(
     @SerializedName("baseId")
@@ -28,4 +29,19 @@ data class MarketData(
     val updated: Long?,
     @SerializedName("volumeUsd24Hr")
     val volumeUsd24Hr: String?
+)
+
+fun MarketData.toDomain() = MarketDomain(
+    baseId = baseId,
+    baseSymbol = baseSymbol,
+    exchangeId = exchangeId,
+    percentExchangeVolume = percentExchangeVolume,
+    priceQuote = priceQuote,
+    priceUsd = priceUsd,
+    quoteId = quoteId,
+    quoteSymbol = quoteSymbol,
+    rank = rank,
+    tradesCount24Hr = tradesCount24Hr,
+    updated = updated,
+    volumeUsd24Hr = volumeUsd24Hr,
 )

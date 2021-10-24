@@ -1,0 +1,19 @@
+package com.yoti.android.cryptocurrencychallenge.domain.model
+
+import com.yoti.android.cryptocurrencychallenge.data.model.assets.AssetData
+
+
+data class AssetDomain(
+    val changePercent24Hr: String?,
+    val explorer: String?,
+    val id: String?,
+    val marketCapUsd: String?,
+    val maxSupply: String?,
+    val name: String?,
+    val priceUsd: String?,
+    val rank: String?,
+    val supply: String?,
+    val symbol: String?,
+    val volumeUsd24Hr: String?,
+    val vwap24Hr: String?
+)
