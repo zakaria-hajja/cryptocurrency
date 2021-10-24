@@ -31,17 +31,3 @@ data class MarketData(
     val volumeUsd24Hr: String?
 )
 
-fun MarketData.toDomain() = MarketDomain(
-    baseId = baseId,
-    baseSymbol = baseSymbol,
-    exchangeId = exchangeId,
-    percentExchangeVolume = percentExchangeVolume,
-    priceQuote = priceQuote,
-    priceUsd = priceUsd,
-    quoteId = quoteId,
-    quoteSymbol = quoteSymbol,
-    rank = rank,
-    tradesCount24Hr = tradesCount24Hr,
-    updated = updated,
-    volumeUsd24Hr = volumeUsd24Hr,
-)

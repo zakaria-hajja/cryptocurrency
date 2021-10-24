@@ -31,17 +31,3 @@ data class AssetData(
     val vwap24Hr: String?
 )
 
-fun AssetData.toDomain() = AssetDomain(
-    changePercent24Hr = changePercent24Hr,
-    explorer = explorer,
-    id = id,
-    marketCapUsd = explorer,
-    maxSupply = maxSupply,
-    name = name,
-    priceUsd = priceUsd,
-    rank = rank,
-    supply = supply,
-    symbol = symbol,
-    volumeUsd24Hr = volumeUsd24Hr,
-    vwap24Hr = vwap24Hr,
-)

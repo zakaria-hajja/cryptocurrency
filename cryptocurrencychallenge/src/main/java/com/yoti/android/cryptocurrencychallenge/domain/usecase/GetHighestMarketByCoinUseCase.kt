@@ -1,7 +1,7 @@
 package com.yoti.android.cryptocurrencychallenge.domain.usecase
 
+import com.yoti.android.cryptocurrencychallenge.commons.Mappers.toDomain
 import com.yoti.android.cryptocurrencychallenge.commons.Resource
-import com.yoti.android.cryptocurrencychallenge.data.model.markets.toDomain
 import com.yoti.android.cryptocurrencychallenge.domain.model.MarketDomain
 import com.yoti.android.cryptocurrencychallenge.domain.repository.CryptoRepository
 import kotlinx.coroutines.flow.Flow

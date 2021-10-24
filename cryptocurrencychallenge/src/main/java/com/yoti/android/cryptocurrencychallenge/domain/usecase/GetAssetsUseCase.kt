@@ -1,8 +1,8 @@
 package com.yoti.android.cryptocurrencychallenge.domain.usecase
 
+import com.yoti.android.cryptocurrencychallenge.commons.Mappers.toDomain
 import com.yoti.android.cryptocurrencychallenge.commons.Resource
 import com.yoti.android.cryptocurrencychallenge.commons.Resource.Exception.Cause
-import com.yoti.android.cryptocurrencychallenge.data.model.assets.toDomain
 import com.yoti.android.cryptocurrencychallenge.domain.model.AssetDomain
 import com.yoti.android.cryptocurrencychallenge.domain.repository.CryptoRepository
 import kotlinx.coroutines.flow.Flow

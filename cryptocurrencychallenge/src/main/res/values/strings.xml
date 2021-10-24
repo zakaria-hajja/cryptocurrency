@@ -5,4 +5,10 @@
     <string name="rank_title">Rank</string>
     <string name="price_title">Price</string>
     <string name="date_title">Date</string>
+
+    <string name="unknown_error">An unknown error has occurred, please try again later</string>
+    <string name="no_internet_error">We couldn\'t connect to server, please check your connection and try again</string>
+    <string name="too_many_request_error">Something went wrong in the server, please try again later</string>
+    <string name="empty_market">No matching market found for your selection</string>
+
 </resources>
