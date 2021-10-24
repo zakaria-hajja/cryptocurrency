@@ -6,6 +6,7 @@ import com.yoti.android.cryptocurrencychallenge.domain.model.AssetDomain
 import com.yoti.android.cryptocurrencychallenge.domain.model.MarketDomain
 import com.yoti.android.cryptocurrencychallenge.presentation.assets.AssetUiItem
 import com.yoti.android.cryptocurrencychallenge.presentation.market.MarketUiModel
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,7 +15,7 @@ object Mappers {
         changePercent24Hr = changePercent24Hr,
         explorer = explorer,
         id = id,
-        marketCapUsd = explorer,
+        marketCapUsd = marketCapUsd,
         maxSupply = maxSupply,
         name = name,
         priceUsd = priceUsd,
@@ -25,8 +26,21 @@ object Mappers {
         vwap24Hr = vwap24Hr,
     )
 
-    fun AssetDomain.toUi() =
-        AssetUiItem(id = id ?: "", symbol = symbol ?: "", name = name ?: "", price = priceUsd ?: "")
+    fun AssetDomain.toUi(): AssetUiItem {
+        val formatter = DecimalFormat("$#,###.##")
+        val price = priceUsd?.let {
+            formatter.format(priceUsd.toDouble()).trim()
+        } ?: run {
+            ""
+        }
+        return AssetUiItem(
+            id = id ?: "",
+            symbol = symbol ?: "",
+            name = name ?: "",
+            price = price
+        )
+
+    }
 
     fun MarketData.toDomain() = MarketDomain(
         baseId = baseId,
@@ -44,12 +58,25 @@ object Mappers {
     )
 
     fun MarketDomain.toUi(): MarketUiModel {
+        val formatter = DecimalFormat("$#,###.##")
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+        val price = priceUsd?.let {
+            formatter.format(priceUsd.toDouble()).trim()
+        } ?: run {
+            ""
+        }
+
+        val date = updated?.let {
+            dateFormat.format(Date(updated))
+        } ?: run {
+            ""
+        }
         return MarketUiModel(
             exchangeId = exchangeId ?: "",
             rank = rank ?: "",
-            price = priceUsd ?: "",
-            date = dateFormat.format(Date(updated ?: 0))
+            price = price,
+            date = date
         )
     }
 }
