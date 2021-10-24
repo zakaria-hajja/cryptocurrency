@@ -30,7 +30,6 @@ class AssetsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAssetsBinding.inflate(layoutInflater)
-        observeViewModel()
         return binding.root
     }
 
@@ -63,6 +62,7 @@ class AssetsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         initUi()
+        observeViewModel()
     }
 
     private fun initUi() {

@@ -2,7 +2,6 @@ package com.yoti.android.cryptocurrencychallenge.data.model.markets
 
 
 import com.google.gson.annotations.SerializedName
-import com.yoti.android.cryptocurrencychallenge.domain.model.MarketDomain
 
 data class MarketData(
     @SerializedName("baseId")

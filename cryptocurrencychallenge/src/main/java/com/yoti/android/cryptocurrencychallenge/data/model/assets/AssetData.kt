@@ -2,7 +2,6 @@ package com.yoti.android.cryptocurrencychallenge.data.model.assets
 
 
 import com.google.gson.annotations.SerializedName
-import com.yoti.android.cryptocurrencychallenge.domain.model.AssetDomain
 
 data class AssetData(
     @SerializedName("changePercent24Hr")

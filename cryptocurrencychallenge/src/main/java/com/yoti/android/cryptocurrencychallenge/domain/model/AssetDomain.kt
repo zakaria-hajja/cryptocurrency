@@ -1,7 +1,5 @@
 package com.yoti.android.cryptocurrencychallenge.domain.model
 
-import com.yoti.android.cryptocurrencychallenge.data.model.assets.AssetData
-
 
 data class AssetDomain(
     val changePercent24Hr: String?,
