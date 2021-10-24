@@ -15,17 +15,17 @@ class GetAssetsUseCase @Inject constructor(private val repository: CryptoReposit
 
     operator fun invoke(): Flow<Resource<List<AssetDomain>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<List<AssetDomain>>())
             val result = repository.getAssets().map { assetData ->
                 assetData.toDomain()
             }
             emit(Resource.Success(result))
         } catch (_: HttpException) {
-            emit(Resource.Exception(Cause.HttpCause))
+            emit(Resource.Exception<List<AssetDomain>>(Cause.HttpCause))
         } catch (_: IOException) {
-            emit(Resource.Exception(Cause.NoInternetConnectionCause))
+            emit(Resource.Exception<List<AssetDomain>>(Cause.NoInternetConnectionCause))
         } catch (_: Exception) {
-            emit(Resource.Exception(Cause.UnknownCause))
+            emit(Resource.Exception<List<AssetDomain>>(Cause.UnknownCause))
         }
     }
 }

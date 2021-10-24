@@ -10,10 +10,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetHighestMarketByCoin @Inject constructor(private val repository: CryptoRepository) {
+class GetHighestMarketByCoinUseCase @Inject constructor(private val repository: CryptoRepository) {
     operator fun invoke(coinId: String): Flow<Resource<MarketDomain>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<MarketDomain>())
             val result =
                 repository.getMarkets().map { marketData -> marketData.toDomain() }
                     .filter { data -> data.baseId == coinId }
@@ -22,11 +22,11 @@ class GetHighestMarketByCoin @Inject constructor(private val repository: CryptoR
                     }
             emit(Resource.Success(result))
         } catch (httpException: HttpException) {
-            emit(Resource.Exception(Resource.Exception.Cause.HttpCause))
+            emit(Resource.Exception<MarketDomain>(Resource.Exception.Cause.HttpCause))
         } catch (_: IOException) {
-            emit(Resource.Exception(Resource.Exception.Cause.NoInternetConnectionCause))
+            emit(Resource.Exception<MarketDomain>(Resource.Exception.Cause.NoInternetConnectionCause))
         } catch (_: Exception) {
-            emit(Resource.Exception(Resource.Exception.Cause.UnknownCause))
+            emit(Resource.Exception<MarketDomain>(Resource.Exception.Cause.UnknownCause))
         }
     }
 }

@@ -2,8 +2,7 @@ package com.yoti.android.cryptocurrencychallenge.commons
 
 sealed class Resource<T>(
     val data: T? = null,
-    val cause: Exception.Cause? = null,
-    val message: String? = null
+    val cause: Exception.Cause? = null
 ) {
     class Success<T>(data: T?) : Resource<T>(data = data)
     class Exception<T>(cause: Cause?) : Resource<T>(cause = cause) {
@@ -14,5 +13,5 @@ sealed class Resource<T>(
         }
     }
 
-    class Loading<T>() : Resource<T>()
+    class Loading<T> : Resource<T>()
 }
