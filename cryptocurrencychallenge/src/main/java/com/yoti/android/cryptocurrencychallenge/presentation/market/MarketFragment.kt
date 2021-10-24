@@ -54,6 +54,10 @@ class MarketFragment : Fragment(), View.OnClickListener {
             binding.emptyView.emptyViewMessage.text = getString(R.string.no_matching_market)
             binding.emptyView.root.visibility = if (showEmpty) View.VISIBLE else View.GONE
         })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+            binding.progressBarMarkets.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
         viewModel.showError.observe(viewLifecycleOwner, { cause ->
             cause?.let {
                 binding.errorView.errorViewMessage.text =
